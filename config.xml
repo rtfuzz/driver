@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
     xmlns:gap = "http://phonegap.com/ns/1.0"
@@ -117,4 +118,56 @@
 	<splash src="splash/ios/Default-Portrait@2x.png" platform="ios" width="1536" height="2048" />
 	<splash src="splash/ios/Default-Landscape@2x.png" platform="ios" width="2048" height="1536" />
     
+=======
+<?xml version="1.0" encoding="utf-8" ?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+    xmlns:gap = "http://phonegap.com/ns/1.0"
+    xmlns:android = "http://schemas.android.com/apk/res/android"
+    id        = "com.apetitego.driver"
+    version   = "1.0.0">
+    <name>ApetiteGO Motorista</name>
+    <description>
+        ApetiteGo para entregas
+    </description>
+    <author email="contato@cyberomnes.com" href="http://cordova.io">
+        cyberomnes.com
+    </author>
+    <icon src="icon.png" />           
+    <content src="index.html" />
+               
+	<preference name="orientation" value="portrait" />
+	<preference name="android-build-tool" value="gradle" />
+	<preference name="permissions" value="none"/>
+		
+	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
+    <gap:plugin name="phonegap-plugin-push" source="npm" spec="1.5.3" />
+    <gap:plugin name="cordova-plugin-device" />		
+	<gap:plugin name="cordova-plugin-inappbrowser" />		
+	<gap:plugin name="cordova-plugin-splashscreen" />	
+	<gap:plugin name="cordova-plugin-geolocation" />
+	<gap:plugin name="cordova-plugin-network-information" />	
+			
+	<gap:plugin name="cordova-plugin-request-location-accuracy" source="npm" />
+	<gap:plugin name="cordova-plugin-x-toast" source="npm" />	
+	<gap:plugin name="cordova-plugin-media" />	
+		
+	<gap:plugin name="cordova-plugin-googlemaps"  source="npm"  >
+       <param name="API_KEY_FOR_ANDROID" value="AIzaSyAY9vP_449--7JSTGDhLzk1JnES8AMn6bA" />
+       <param name="API_KEY_FOR_IOS" value="AIzaSyACJz09BEJ3pq83G4C45xC0RWfj7UAZDLo" />
+    </gap:plugin>
+    
+	<gap:splash src="splash.png" />
+	<preference name="AutoHideSplashScreen" value="false" />  	
+    <preference name="SplashScreenDelay" value="5000" />  
+	
+    <access origin="*" />
+    <access origin="tel:*" launch-external="yes" />
+    
+    <gap:config-file platform="android" parent="/manifest">
+        <supports-screens android:xlargeScreens="true" android:largeScreens="true" android:smallScreens="true" />
+        <application android:theme="@android:style/Theme.NoTitleBar" >            
+        </application>
+    </gap:config-file>    
+    
+>>>>>>> origin/master
 </widget>
