@@ -55,8 +55,7 @@
      <div class="myloader"></div>
    </ons-modal>
 
-     <ons-navigator id="kNavigator" page="pageGetSettings.html"></ons-navigator>
-             
+     <ons-navigator id="kNavigator" page="pageGetSettings.html"></ons-navigator>            
     
      <ons-template id="pageGetSettings.html"> 
       <ons-page id="pageGetSettings" modifier="login-page" >
@@ -109,15 +108,31 @@
            </p>
            
            <p class="text-left"">
-           <ons-button modifier="large" onclick="login()" >
-           <span class="trn" data-trn-key="signin">Sign In</span>
-           </ons-button>          
+            <ons-if platform="android">
+	           <ons-button modifier="large" onclick="login()" >
+	           <span class="trn" data-trn-key="signin">Sign In</span>
+	           </ons-button>          
+	        </ons-if>
+	        <ons-if platform="ios other">
+	           <ons-button modifier="large green-button" onclick="login()" >
+	           <span class="trn" data-trn-key="signin">Sign In</span>
+	           </ons-button>          
+	        </ons-if>
            </p>              
                
            <p class="text-left">
-            <ons-button modifier="quiet" onclick="showPage('forgotpass.html');">
-              <span class="trn" data-trn-key="forgot_password" >Forgot Password?</span>
-            </ons-button>
+            <ons-if platform="android">
+              <ons-button modifier="quiet" onclick="showPage('forgotpass.html');">
+                <span class="trn" data-trn-key="forgot_password" >Forgot Password?</span>
+              </ons-button>
+            </ons-if>
+            
+            <ons-if platform="ios other">
+              <ons-button modifier="quiet" onclick="showPage('forgotpass.html');">
+                <span class="trn white-text" data-trn-key="forgot_password" >Forgot Password?</span>
+              </ons-button>
+            </ons-if>
+                        
            </p>
            
            </form>    
@@ -161,16 +176,35 @@
           </p>          
           
           <p class="text-left"">
-           <ons-button modifier="large" onclick="forgotPass()"  >
-           <span class="trn" data-trn-key="submit" >Submit</span>
-           </ons-button>
+            <ons-if platform="android">  
+             <ons-button modifier="large" onclick="forgotPass()"  >
+              <span class="trn" data-trn-key="submit" >Submit</span>
+             </ons-button>
+            </ons-if>
+            
+            <ons-if platform="ios other">
+             <ons-button modifier="large green-button" onclick="forgotPass()"  >
+              <span class="trn" data-trn-key="submit" >Submit</span>
+             </ons-button>
+            </ons-if>
+            
           </p>
           </form>
           
           <p class="text-left">
-            <ons-button modifier="quiet" onclick="showChangePassword()">
-            <span class="trn" data-trn-key="already_have_password" >Already have Password Code?</span>
-            </ons-button>
+          
+            <ons-if platform="android">
+		        <ons-button modifier="quiet" onclick="showChangePassword()">
+		        <span class="trn" data-trn-key="already_have_password" >Already have Password Code?</span>
+		        </ons-button>
+            </ons-if>
+            
+            <ons-if platform="ios other">
+		        <ons-button modifier="quiet" onclick="showChangePassword()">
+		        <span class="trn white-text" data-trn-key="already_have_password" >Already have Password Code?</span>
+		        </ons-button>
+            </ons-if>
+            
           </p>
           
        </div>
@@ -245,7 +279,7 @@
          <p class="duty_status"></p>
        </ons-col>
        <ons-col  >
-          <ons-switch input-id="onduty" class="on-duty" onclick="changeDuty()"   ></ons-switch>
+          <ons-switch input-id="onduty" class="on-duty" onchange="changeDuty()"   ></ons-switch>
        </ons-col>
     </ons-row>   
     
@@ -390,7 +424,7 @@
     <ons-template id="profilePage.html"> 
     <ons-page id="profilePage" >
 		
-       <ons-toolbar>        
+       <ons-toolbar modifier="toolbar-noshadow">        
          <div class="left"><ons-back-button></ons-back-button></div>          
          <div class="center toolbar-title-profile">
          <span class="trn" data-trn-key="profile" >Profile</span>
@@ -423,6 +457,14 @@
              <div class="col border"> 
                <b class="trn" data-trn-key="team" >Team</b>
                <p class="team-name"></p>
+             </div>
+           </div>
+           
+           <div class="table top10">
+             <div class="col a border"><ons-icon icon="ion-android-contact" size="30px"></ons-icon></div>
+             <div class="col border"> 
+               <b class="trn" data-trn-key="name">Name</b>
+               <p class="driver-fullname"></p>
              </div>
            </div>
            
@@ -593,7 +635,7 @@
 		        <span class="trn" data-trn-key="enabled_push" >Enabled Push Notification</span>
 		      </div>
 		      <div class="right">
-		        <ons-switch input-id="enabled_push" onclick="UpdatePush()"></ons-switch>
+		        <ons-switch input-id="enabled_push" onchange="UpdatePush()"></ons-switch>
 		      </div>
 		    </ons-list-item>
 		    

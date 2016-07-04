@@ -80,13 +80,15 @@ $( document ).on( "keyup", ".numeric_only", function() {
 /*START DEVICE READY*/
 document.addEventListener("deviceready", function() {
 	
+	navigator.splashscreen.hide();
+	
 	if ( !empty(krms_driver_config.PushProjectID)) {
 		
 		var push = PushNotification.init({
 	        "android": {
 	            "senderID": krms_driver_config.PushProjectID
-	        },
-	        "ios": {"alert": "true", "badge": "true", "sound": "true"}, 
+	        },	        
+	        "ios": {"alert": "true", "badge": "true", "sound": "true", "clearBadge": "true" }, 
 	        "windows": {} 
 	    });
 	    
@@ -113,6 +115,10 @@ document.addEventListener("deviceready", function() {
 	     	  	 	toastMsg( data.message ); 	  	 	
 	     	  	 	break;
 	     	  	 	
+	     	  	 	case "private":
+	     	  	 	case "bulk":
+	     	  	 	onsenAlert( data.message );
+	     	  	 	break;
 	     	  	 	
 	     	  	 	default:
 	     	  	 	toastMsg( data.message ); 	  	 	
@@ -131,6 +137,11 @@ document.addEventListener("deviceready", function() {
 	     	  	 		getTodayTask('');
 	     	  	 	} 
 	     	  	 	toastMsg( data.message );
+	     	  	 	break;
+	     	  	 		     	  	 	
+	     	  	 	case "private":
+	     	  	 	case "bulk":
+	     	  	 	onsenAlert( data.message );
 	     	  	 	break;
 	     	  	 	
 	     	  	 	default:
@@ -152,12 +163,15 @@ document.addEventListener("deviceready", function() {
  }, false);
 /*END DEVICE READY*/
 
+// set device
 ons.platform.select('android');
+//ons.platform.select('ios');
+
 ons.ready(function() {
 	
 	/*ons.setDefaultDeviceBackButtonListener(function() {	   	   
 	});*/	
-	
+		
 }); /*end ready*/
 
 
@@ -183,6 +197,14 @@ document.addEventListener("offline", noNetConnection, false);
 function noNetConnection()
 {
 	toastMsg( getTrans("Internet connection lost","net_connection_lost") );
+}
+
+document.addEventListener("online", hasNetConnection, false);
+
+function hasNetConnection()
+{	
+	//toastMsg( getTrans("Connected","connected") );
+	//callAjax("DeviceConnected",'');
 }
 
 document.addEventListener("backbutton", function (e) {	   
@@ -675,6 +697,7 @@ function callAjax(action,params)
 		   			
 		   			
 		   			case "GetProfile":
+		   			$(".driver-fullname").html( data.details.full_name );
 		   			$(".team-name").html( data.details.team_name );
 		   			$(".driver-email").html( data.details.email );
 		   			$(".phone").val( data.details.phone );
@@ -707,6 +730,8 @@ function callAjax(action,params)
 		   			
 		   			//silent
 		   			case "SettingPush":
+		   			case "DeviceConnected":
+		   			case "Logout":
 		   			break;
 		   			
 		   			case "GetSettings":
@@ -784,7 +809,7 @@ function callAjax(action,params)
 		   			break;
 		   			
 		   			case "ViewOrderDetails":
-		   			$("#order-details").html( formatOrderDetails( data.details ) );
+		   			$("#order-details").html( formatOrderDetails( data.details , data.msg ) );
 		   			break;
 		   			
 		   			case "GetNotifications":		   			
@@ -822,11 +847,14 @@ function callAjax(action,params)
 			        $(".login-header").show();
 			        $(".auto-login-wrap").hide();
 		   			onsenAlert( data.msg );
+		   			removeStorage("kr_remember");
 		   			break;
 		   			
 		   			//silent		   			
 		   			case "SettingPush":
 		   			case "GetAppSettings":
+		   			case "DeviceConnected":
+		   			case "Logout":
 		   			break;
 		   					   			
 		   			case "GetNotifications":
@@ -942,14 +970,18 @@ function toastMsg( message )
 	}
 	 
     window.plugins.toast.showWithOptions(
-    {
-      message: message ,
-      duration: "long",
-      position: "bottom",
-      addPixelsY: -40 
-    },
-      toastOnSuccess, 
-      toastOnError  
+      {
+        message: message ,
+        duration: "long",
+        position: "bottom",
+        addPixelsY: -40 
+      },
+      function(args) {
+      	
+      },
+      function(error) {
+      	onsenAlert( message );
+      }
     );
 }
 
@@ -1038,10 +1070,10 @@ function changeDuty()
 	dump(onduty_handle);
 	var onduty = document.getElementById('onduty').checked==true?1:2 ;	
 	params="onduty="+onduty;
-	if ( onduty_handle==2){
+	//if ( onduty_handle==2){
 	   callAjax("ChangeDutyStatus",params);
 	   onduty_handle=0;
-	}
+	//}
 }
 
 var showMenu = function(element) {   
@@ -1090,6 +1122,7 @@ function swicthButtonAction( task_id, status_raw )
 	switch (status_raw)
 	{
 		case "assigned":
+		case "unassigned":
 		action='acknowledged';
 		html+='<p><ons-button modifier="large"';
 		html+='onclick="changeTaskStatus('+task_id+','+ "'"+action+"'" +' )" > '+ getTrans("Accept",'accept') +' </ons-button></p>';
@@ -1330,10 +1363,10 @@ function UpdatePush()
 	dump('UpdatePush');
 	var enabled_push = document.getElementById('enabled_push').checked==true?1:2 ;	
 	params="enabled_push="+enabled_push;
-	if ( switch_handle==2){
+	//if ( switch_handle==2){
 	   callAjax("SettingPush",params);
 	   switch_handle=0;
-	}
+	//}
 }
 
 
@@ -1371,7 +1404,10 @@ function Logout()
 	$(".auto-login-wrap").hide();
 	$("#frm-login").show();
 	$(".login-header").show();
-    kNavigator.popPage().then(function() {								    	   
+    kNavigator.popPage().then(function() {	
+    	// clear watch id
+    	navigator.geolocation.clearWatch(watchID);
+    	callAjax("Logout",'');			    	   
     });
 }
 
@@ -1498,12 +1534,18 @@ function onError(error) {
 }
 
 function checkGPS()
-{			
+{				
 	 if (isDebug()){
 		return ;
 	 }
+	 
+	 if ( device.platform =="iOS"){	 	 	 	 
+	 	 getCurrentPosition();
+	 	 return;
+	 }
+	 
      cordova.plugins.locationAccuracy.request( onRequestSuccess, 
-	 onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);		
+	 onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
 }
 
 function onRequestSuccess(success){
@@ -1515,18 +1557,18 @@ function onRequestFailure(error){
     //alert("Accuracy request failed: error code="+error.code+"; error message="+error.message);    
     if(error.code == 4){
     	toastMsg( getTrans("You have choosen not to turn on location accuracy",'turn_off_location') );
+    	checkGPS();
     } else {
     	toastMsg( error.message );
     }
 }
 
-function toastOnSuccess()
+/*function toastOnSuccess()
 {
 }
 function toastOnError()
 {
-	onsenAlert("ERROR");
-}
+}*/
 
 function viewTaskMap(task_id , task_lat, task_lng , delivery_address )
 {
@@ -1664,8 +1706,11 @@ function viewTaskDirection()
 	   "to": "Kyoto, Japan"
 	});*/	
 		
-   var delivery_address=getStorage('delivery_address');
-   dump(delivery_address);
+   /*var delivery_address=getStorage('delivery_address');
+   dump(delivery_address);*/
+   
+   var task_lat=getStorage('task_lat');
+   var task_lng=getStorage('task_lng');
 	
    navigator.geolocation.getCurrentPosition( function(position) {	    
    	         
@@ -1673,9 +1718,11 @@ function viewTaskDirection()
          //demo
          //var yourLocation = new plugin.google.maps.LatLng(34.039413 , -118.25480649999997); 	        
          
+         var destination_location = new plugin.google.maps.LatLng(task_lat , task_lng); 	        
+         
          plugin.google.maps.external.launchNavigation({
 	         "from": yourLocation,
-	         "to": delivery_address
+	         "to": destination_location
 	      });	
 
     	 // end position success    	 

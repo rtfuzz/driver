@@ -402,8 +402,8 @@ function OrderDetails(data)
    return html;
 }
 
-function formatOrderDetails(data)
-{
+function formatOrderDetails(data , data2 )
+{	
 	if(empty(data)){
 		return;
 	}
@@ -421,11 +421,20 @@ function formatOrderDetails(data)
 	
 	var item='';
 	
-	item+='<p>'+ getTrans("Order No","order_no") + " :" + data.order_info.order_id+'</p>'
+	item+='<p><b>'+ getTrans("Order No","order_no") + " :" + data.order_info.order_id+'</b></p>'
 	if (data.order_info.order_change>0){
 	item+='<p>'+ getTrans("Change","change") + " :" + prettyPrice(data.order_info.order_change)+'</p>'
 	}
-	
+		
+	if (data2.length>0){
+		$.each( data2, function( key_1, val_1 ) { 			
+			item+= '<div class="table">';	   	      
+	   	      item+= '<div class="col b" style="width:35%;">'+ val_1.label + '</div>';	   	     
+	   	      item+= '<div class="col c">'+  val_1.value  +'</div>';
+	   	   item+= '</div>';
+		});
+	}
+		
 	if (data.item.length>0){	
 	   $.each( data.item, function( key, val ) {     
 	   	   size='';
@@ -608,6 +617,9 @@ function formatNotifications(data)
 	   	   link="";
 	   	   if (val.actions!="CANCEL_TASK"){
 	   	   	   link='onclick="showTask('+val.task_id+')"';
+	   	   }
+	   	   if (val.actions=="private" || val.actions=="bulk"){
+	   	   	   link="";
 	   	   }
 	   	   
 	   	   html+='<ons-list-item '+ link +' tappable  modifier="task-list"  >  ';

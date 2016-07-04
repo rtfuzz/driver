@@ -2,7 +2,7 @@
 
 var krms_driver_config ={		
 	'ApiUrl': "http://apetitego.com.br/driver/api",
-	'DialogDefaultTitle': "Seu apetite bem cuidado",	
+	'DialogDefaultTitle': "ApetiteGO"	
 	'PushProjectID': "172997422108",	
-	'APIHasKey': "FuzzSFJDdfsaf3i214u98@!#$theStarHash"
+	'APIHasKey': "FuzzSFJDdfsaf3i214utheStarHash"
 };

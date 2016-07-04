@@ -2,8 +2,85 @@
 CHANGELOG
 ====
 
+v2.0.0-rc.15
+----
+ * ons-navigator: Improved iOS slide animation. Fix [#1457](https://github.com/OnsenUI/OnsenUI/issues/1457).
+ * ons.platform: Fix [#1482](https://github.com/OnsenUI/OnsenUI/issues/1482).
+ * ons-modal: Support showing on init.
+ * ons-speed-dial: Add bindings for AngularJS 1.x.
+ * ons-fab: Add bindings for AngularJS 1.x.
+ * ons-pull-hook: Fix flickering on iOS.
+
+v2.0.0-rc.14
+----
+ * core: Update TypeScript definitions.
+
+v2.0.0-rc.13
+----
+ * ons-dialog: Fix Chrome issue with invalid event name.
+
+v2.0.0-rc.12
+----
+ * core: Added type definitions.
+ * ons-switch: Fix [#1464](https://github.com/OnsenUI/OnsenUI/issues/1464).
+ * ons-splitter: Fix [#1392](https://github.com/OnsenUI/OnsenUI/issues/1392).
+
+v2.0.0-rc.11
+----
+ * core: Added binding for Angular2.
+ * ons-input: Fix `value` property bug for radio and checkbox.
+ * ons-navigator: Fix [#1449](https://github.com/OnsenUI/OnsenUI/issues/1449).
+ * ons-popover: Fix [#1450](https://github.com/OnsenUI/OnsenUI/issues/1450).
+ * ons-navigator: Fix [#1389](https://github.com/OnsenUI/OnsenUI/issues/1389).
+ * ons-popover: Fix [#1388](https://github.com/OnsenUI/OnsenUI/issues/1388).
+ * ons-navigator: Fix [#1430](https://github.com/OnsenUI/OnsenUI/issues/1430).
+ * ons-splitter-side: Use imported `orientation` object instead of global.
+ * ons-navigator: Fix [#1453](https://github.com/OnsenUI/OnsenUI/issues/1453).
+
+v2.0.0-rc.10
+----
+ * ons-navigator: Fix [#1440](https://github.com/OnsenUI/OnsenUI/issues/1440).
+ * ons-toolbar, ons-speed-dial: Fix [#1441](https://github.com/OnsenUI/OnsenUI/issues/1441).
+ * ons-splitter-side: Fix `_width` property.
+ * css-components: Fixed list divider modifiers for MD.
+ * ons-pull-hook: Fix [#1444](https://github.com/OnsenUI/OnsenUI/issues/1444).
+
+v2.0.0-rc.9
+----
+ * ons-popover: Fix iOS glitch.
+ * ons-fab: Fix issue where element was not shown correctly in React.
+
+v2.0.0-rc.8
+----
+ * core: Fixed [#845](https://github.com/OnsenUI/OnsenUI/issues/845).
+ * ons-pull-hook: Add React compatibility.
+
+v2.0.0-rc.7
+----
+ * ons-carousel: Support ng-repeat in Angular1 bindings.
+ * ons-carousel: Fix [#1168](https://github.com/OnsenUI/OnsenUI/issues/1168).
+ * ons-switch: Trigger `change` event only once.
+ * ons-bottom-toolbar: Correctly register element. Fix [#1426](https://github.com/OnsenUI/OnsenUI/issues/1426).
+ * ons-pull-hook: Fix [#1415](https://github.com/OnsenUI/OnsenUI/issues/1415).
+ * ons-navigator: Add `onDeviceBackButton` property.
+ * ons-fab: Show button by default.
+
+v2.0.0-rc.6
+----
+ * ons-page: Change to fill page background element if there is only .page__content element in ons-page.
+ * ons-splitter: 'load' methods return promises in Angular1 bindings.
+ * ons-navigator: Fix 'popPage' with 'refresh' parameter.
+ * ons-dialog: Make ons-dialog angular2 compatible.
+ * ons-speed-dial, ons-speed-dial-item: Removed `_compiled` attribute.
+ * ons-speed-dial: Make ons-speed-dial elements angular2 compatible.
+ * ons-carousel: Fix [#1423](https://github.com/OnsenUI/OnsenUI/issues/1423).
+ * core: Create unified `onDeviceBackButton` API for alert-dialog, dialog, modal, page, popover, splitter.
+
 v2.0.0-rc.5
 ----
+ * ons-dialog: Make ons-dialog angular2 compatible.
+ * ons-speed-dial, ons-speed-dial-item: Removed "_compiled" attribute.
+ * ons-speed-dial: Make ons-speed-dial elements angular2 compatible.
  * css-components: Fix material list item paddings.
  * ons-list: Fix [#1401](https://github.com/OnsenUI/OnsenUI/issues/1401).
  * ons-range: Fix [#1391](https://github.com/OnsenUI/OnsenUI/issues/1391).
@@ -277,6 +354,14 @@ v2.0.0-beta
  * core: Add support for Browserify.
  * ons.platform: uses cordova-plugin-device if installed.
  * ons-back-button: automatically hides if navigator has only 1 page.
+
+v1.3.17
+----
+* ons-tabbar: Remove previous page when using `loadPage()`.
+
+v1.3.16
+----
+* ons-pull-hook: Fix flickering in iOS.
 
 v1.3.14
 ----

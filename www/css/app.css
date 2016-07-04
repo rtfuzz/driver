@@ -246,6 +246,8 @@ text-transform:none;
 -webkit-box-shadow: none;
 -moz-box-shadow: none;
 box-shadow: none;
+background:#009688;
+color:#fff;
 }
 
 .orange-bar{
@@ -579,4 +581,37 @@ line-height: 13px;
 padding: 0 4px;
 min-width: 13px;
 margin-left: 18px;
+}
+
+/** 1.1 new css */
+.navigation-bar--toolbar-noshadow .toolbar-button,
+.navigation-bar--toolbar-noshadow .toolbar-button--outline, 
+.navigation-bar--toolbar-noshadow .toolbar-button--quiet,
+.navigation-bar--toolbar-noshadow .navigation-bar__title,
+.navigation-bar--toolbar-noshadow .back-button
+{
+color:#fff;
+}
+
+.navigation-bar--ktransparent-toolbar,
+.button--green-button
+{
+background:#009688;
+color:#fff;
+}
+
+.navigation-bar--ktransparent-toolbar .toolbar-button,
+.navigation-bar--ktransparent-toolbar .toolbar-button--outline, 
+.navigation-bar--ktransparent-toolbar .toolbar-button--quiet,
+.navigation-bar--ktransparent-toolbar .navigation-bar__title,
+.navigation-bar--ktransparent-toolbar .back-button,
+.white-text
+{
+color:#fff;
+}
+
+.frm .text-input--underbar,
+#frm-forgotpass .text-input--underbar
+{
+color:#fff;
 }
