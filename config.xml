@@ -167,6 +167,4 @@
         <application android:theme="@android:style/Theme.NoTitleBar" >            
         </application>
     </gap:config-file>    
-    
->>>>>>> origin/master
 </widget>
