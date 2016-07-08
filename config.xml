@@ -2,13 +2,13 @@
 <widget xmlns = "http://www.w3.org/ns/widgets"
     xmlns:gap = "http://phonegap.com/ns/1.0"
     xmlns:android = "http://schemas.android.com/apk/res/android"
-    id        = "kmrs.driver.app"
+    id        = "com.apetitego.driver"
     version   = "1.1.0">
-    <name>ApetiteGO Driver</name>
+    <name>ApetiteGO Motorista</name>
     <description>
-        Aplicativo movel para motoristas
+        Aplicativo ApetiteGo para motoristas
     </description>
-    <author email="rfuzz@cyberomnes.com" href="http://cordova.io">
+    <author email="cyberomnes@cyberomnes.com" href="http://cordova.io">
         cyberomnes.com
     </author>
     <icon src="icon.png" />           
